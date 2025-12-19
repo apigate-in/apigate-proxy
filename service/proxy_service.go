@@ -104,6 +104,7 @@ func (s *ProxyService) Check(req models.AllowRequest) (models.AllowResponse, err
 	// 1. Encrypt email (if configured) and track keys for next window
 	reqFor := req // copy
 	if req.Email != "" {
+		// Encrypt the Identifier (Email OR User-ID)
 		reqFor.Email = s.EncryptEmail(req.Email)
 	}
 	s.trackKeys(reqFor)

@@ -3,7 +3,7 @@ package models
 // AllowRequest represents the body of the individual check request.
 type AllowRequest struct {
 	IPAddress string `json:"ip_address"`
-	Email     string `json:"email"`
+	Email     string `json:"email"`      // Can be Email OR any unique User ID
 	UserAgent string `json:"user_agent"` // Optional, can be populated from header
 }
 

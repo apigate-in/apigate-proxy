@@ -91,7 +91,7 @@ Once the proxy is running (e.g., at `localhost:8080`), update your application t
 ```json
 {
   "ip_address": "192.168.1.50",
-  "email": "user@customer.com",
+  "email": "user@customer.com", // OR "user_123456" (Any unique User ID)
   "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)..."
 }
 ```
@@ -149,7 +149,7 @@ While direct API calls are async, sending a request for every user action can qu
 ```json
 {
   "ip_address": "192.168.1.5",
-  "email": "user@example.com",
+  "email": "user@example.com",     // OR "user_id_123"
   "user_agent": "Mozilla/5.0...",
   "http_method": "POST",
   "endpoint": "/v1/login",

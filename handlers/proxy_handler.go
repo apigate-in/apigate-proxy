@@ -40,7 +40,7 @@ func (h *ProxyHandler) AllowDecisionHandler(w http.ResponseWriter, r *http.Reque
 		json.NewEncoder(w).Encode(models.AllowResponse{
 			Allow:  false,
 			Status: "failure",
-			Error:  "Missing required fields (ip_address or email)",
+			Error:  "Missing required fields (ip_address or email/user_id)",
 		})
 		return
 	}
