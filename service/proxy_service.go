@@ -157,7 +157,13 @@ func (s *ProxyService) Check(req models.AllowRequest) (models.AllowResponse, err
 	// Call Upstream Batch
 	results, err := s.callUpstreamBatch(keys)
 	if err != nil {
-		return models.AllowResponse{}, err
+		// FAIL OPEN STRATEGY: If upstream is down, allow traffic to proceed.
+		log.Printf("[ProxyService] Upstream check failed (Fail Open triggering): %v", err)
+		return models.AllowResponse{
+			Allow:   true,
+			Status:  "success",
+			Message: "Allowed (Fail Open)",
+		}, nil
 	}
 
 	// Process Results & Update Cache
