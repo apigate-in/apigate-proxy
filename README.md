@@ -62,6 +62,11 @@ UPSTREAM_API_KEY=your_project_api_key_here
 # This key is used to hash user emails locally.
 # If you lose this, you cannot look up previous user logs by email.
 EMAIL_ENCRYPTION_KEY=change_this_to_a_secure_random_string
+
+# Enable or disable email encryption (default false)
+# If set to false, emails will be sent to the APIGate Cloud as plaintext.
+# Set to 'true' to enable the local hashing privacy feature.
+EMAIL_ENCRYPTION_ENABLED=false
 ```
 
 ### 4. Start the Service

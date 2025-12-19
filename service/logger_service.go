@@ -51,7 +51,8 @@ func (s *LoggerService) Start() {
 
 func (s *LoggerService) QueueLog(req models.LogRequest) {
 	// Encrypt email immediately if configured
-	if s.config.EmailEncryptionKey != "" && req.Email != "" {
+	// Encrypt email immediately if configured and enabled
+	if s.config.EmailEncryptionEnabled && s.config.EmailEncryptionKey != "" && req.Email != "" {
 		if s.config.EmailEncryptionFormat == "numeric" {
 			req.Email = utils.OneWayKeyedHashNumeric([]byte(s.config.EmailEncryptionKey), req.Email)
 		} else {

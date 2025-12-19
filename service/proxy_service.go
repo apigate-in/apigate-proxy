@@ -87,9 +87,9 @@ func (s *ProxyService) Start() {
 	}()
 }
 
-// EncryptEmail encrypts the email if encryption key is configured.
+// EncryptEmail encrypts the email if encryption is enabled and key is configured.
 func (s *ProxyService) EncryptEmail(email string) string {
-	if email == "" || s.config.EmailEncryptionKey == "" {
+	if email == "" || !s.config.EmailEncryptionEnabled || s.config.EmailEncryptionKey == "" {
 		return email
 	}
 	if s.config.EmailEncryptionFormat == "numeric" {

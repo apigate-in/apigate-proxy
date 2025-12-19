@@ -9,14 +9,15 @@ import (
 )
 
 type Config struct {
-	ServerPort            string
-	UpstreamBaseURL       string
-	WindowSeconds         int
-	LogFlushInterval      int // Seconds
-	LogBatchSize          int
-	UpstreamAPIKey        string
-	EmailEncryptionKey    string
-	EmailEncryptionFormat string
+	ServerPort             string
+	UpstreamBaseURL        string
+	WindowSeconds          int
+	LogFlushInterval       int // Seconds
+	LogBatchSize           int
+	UpstreamAPIKey         string
+	EmailEncryptionKey     string
+	EmailEncryptionEnabled bool
+	EmailEncryptionFormat  string
 }
 
 func LoadConfig() *Config {
@@ -72,6 +73,13 @@ func LoadConfig() *Config {
 		LogBatchSize:       logBatch,
 		UpstreamAPIKey:     apiKey,
 		EmailEncryptionKey: os.Getenv("EMAIL_ENCRYPTION_KEY"),
+		EmailEncryptionEnabled: func() bool {
+			val := os.Getenv("EMAIL_ENCRYPTION_ENABLED")
+			if val == "true" {
+				return true
+			}
+			return false
+		}(),
 		EmailEncryptionFormat: func() string {
 			if f := os.Getenv("EMAIL_ENCRYPTION_FORMAT"); f != "" {
 				return f

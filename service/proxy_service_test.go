@@ -54,10 +54,11 @@ func TestProxyService_Flow(t *testing.T) {
 	// 2. Setup Config
 	// Use the same fixed 32-byte key declared above for tests
 	cfg := &config.Config{
-		ServerPort:         "9090",
-		UpstreamBaseURL:    upstream.URL,
-		WindowSeconds:      2, // Short window for testing
-		EmailEncryptionKey: testKey,
+		ServerPort:             "9090",
+		UpstreamBaseURL:        upstream.URL,
+		WindowSeconds:          2, // Short window for testing
+		EmailEncryptionKey:     testKey,
+		EmailEncryptionEnabled: true,
 	}
 
 	svc := NewProxyService(cfg)
@@ -109,7 +110,7 @@ func TestProxyService_Flow(t *testing.T) {
 	if svc.warmUp {
 		t.Error("Warmup should be off")
 	}
-	if svc.currentCache == nil || len(svc.currentCache) == 0 {
+	if len(svc.currentCache) == 0 {
 		t.Error("Current cache empty after swap")
 	}
 	svc.mu.RUnlock()
